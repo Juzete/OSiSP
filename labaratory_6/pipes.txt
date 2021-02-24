@@ -1,0 +1,5 @@
+unnamed pipe
+handles one way communication. Also called an anonymous pipe (or simply pipe), it is typically used to communicate between a parent process and a child process. Within SAS, the SAS System is the parent process that invokes (and reads data from) a child process.
+
+named pipe
+handles one-way or two-way communication between two unrelated processes. That is, one process is not started by the other. In fact, it is possible to have two applications communicating over a pipe on a network. You can use named pipes within SAS to communicate with other applications or even with another SAS session.

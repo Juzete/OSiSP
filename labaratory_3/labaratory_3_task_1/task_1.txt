@@ -1,0 +1,263 @@
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat << EOF > file1.txt
+> aaa@mail.ru Dmitry Petrov
+> bbb@mail.ru Eugeny Ivanov
+> ccc@mail.ru Pavel Smirnov
+> EOF
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ ls
+file1.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ vi file2.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ join file{1,2}.txt
+aaa@mail.ru Dmitry Petrov +79612323232
+bbb@mail.ru Eugeny Ivanov +79623131313
+ccc@mail.ru Pavel Smirnov +79634578787
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ join file{1,2}.txt : cut -d " " -f 2,3,4
+join: extra operand ':'
+Try 'join --help' for more information.
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ join --help
+Usage: join [OPTION]... FILE1 FILE2
+For each pair of input lines with identical join fields, write a line to
+standard output.  The default join field is the first, delimited by blanks.
+
+When FILE1 or FILE2 (not both) is -, read standard input.
+
+  -a FILENUM        also print unpairable lines from file FILENUM, where
+                      FILENUM is 1 or 2, corresponding to FILE1 or FILE2
+  -e EMPTY          replace missing input fields with EMPTY
+  -i, --ignore-case  ignore differences in case when comparing fields
+  -j FIELD          equivalent to '-1 FIELD -2 FIELD'
+  -o FORMAT         obey FORMAT while constructing output line
+  -t CHAR           use CHAR as input and output field separator
+  -v FILENUM        like -a FILENUM, but suppress joined output lines
+  -1 FIELD          join on this FIELD of file 1
+  -2 FIELD          join on this FIELD of file 2
+  --check-order     check that the input is correctly sorted, even
+                      if all input lines are pairable
+  --nocheck-order   do not check that the input is correctly sorted
+  --header          treat the first line in each file as field headers,
+                      print them without trying to pair them
+  -z, --zero-terminated     line delimiter is NUL, not newline
+      --help     display this help and exit
+      --version  output version information and exit
+
+Unless -t CHAR is given, leading blanks separate fields and are ignored,
+else fields are separated by CHAR.  Any FIELD is a field number counted
+from 1.  FORMAT is one or more comma or blank separated specifications,
+each being 'FILENUM.FIELD' or '0'.  Default FORMAT outputs the join field,
+the remaining fields from FILE1, the remaining fields from FILE2, all
+separated by CHAR.  If FORMAT is the keyword 'auto', then the first
+line of each file determines the number of fields output for each line.
+
+Important: FILE1 and FILE2 must be sorted on the join fields.
+E.g., use "sort -k 1b,1" if 'join' has no options,
+or use "join -t ''" if 'sort' has no options.
+Note, comparisons honor the rules specified by 'LC_COLLATE'.
+If the input is not sorted and some lines cannot be joined, a
+warning message will be given.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/join>
+or available locally via: info '(coreutils) join invocation'
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ join file{1,2}.txt | cut -d " " -f 2,3,4
+Dmitry Petrov +79612323232
+Eugeny Ivanov +79623131313
+Pavel Smirnov +79634578787
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ eccho bbb@mail.ru Sergey Kalinin >> file1.txt
+bash: eccho: command not found
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ echo ddd@mail.ru Dmitry Sverchkob >> file1.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ echoecho ccc@mail.ru +79658745963 >> file2.txt
+bash: echoecho: command not found
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ echo ccc@mail.ru +79658745963 >> file2.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ echo jjj@mail.ru +79632147852 >> file2.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file{1,2}.txt
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+aaa@mail.ru +79612323232
+bbb@mail.ru +79623131313
+ccc@mail.ru +79634578787
+
+ccc@mail.ru +79658745963
+jjj@mail.ru +79632147852
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt : sort
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+cat: ':': No such file or directory
+cat: sort: No such file or directory
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | sort
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | sort -k 2
+aaa@mail.ru Dmitry Petrov
+ddd@mail.ru Dmitry Sverchkob
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | sort
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort
+aaa@mail.ru
+bbb@mail.ru
+ccc@mail.ru
+ddd@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt cut -d" " -f1 | sort | uniq
+cat: unknown option -- d
+Try 'cat --help' for more information.
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq
+aaa@mail.ru
+bbb@mail.ru
+ccc@mail.ru
+ddd@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -d bbb@mail.ru
+uniq: bbb@mail.ru: No such file or directory
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -d
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -b
+uniq: unknown option -- b
+Try 'uniq --help' for more information.
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -d
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -dcat file1.txt | cut -d" " f1 | sort | uniq -d
+uniq: unknown option -- a
+Try 'uniq --help' for more information.
+cut: you must specify a list of bytes, characters, or fields
+Try 'cut --help' for more information.
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ uniq --help
+Usage: uniq [OPTION]... [INPUT [OUTPUT]]
+Filter adjacent matching lines from INPUT (or standard input),
+writing to OUTPUT (or standard output).
+
+With no options, matching lines are merged to the first occurrence.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -c, --count           prefix lines by the number of occurrences
+  -d, --repeated        only print duplicate lines, one for each group
+  -D                    print all duplicate lines
+      --all-repeated[=METHOD]  like -D, but allow separating groups
+                                 with an empty line;
+                                 METHOD={none(default),prepend,separate}
+  -f, --skip-fields=N   avoid comparing the first N fields
+      --group[=METHOD]  show all items, separating groups with an empty line;
+                          METHOD={separate(default),prepend,append,both}
+  -i, --ignore-case     ignore differences in case when comparing
+  -s, --skip-chars=N    avoid comparing the first N characters
+  -u, --unique          only print unique lines
+  -z, --zero-terminated     line delimiter is NUL, not newline
+  -w, --check-chars=N   compare no more than N characters in lines
+      --help     display this help and exit
+      --version  output version information and exit
+
+A field is a run of blanks (usually spaces and/or TABs), then non-blank
+characters.  Fields are skipped before chars.
+
+Note: 'uniq' does not detect repeated lines unless they are adjacent.
+You may want to sort the input first, or use 'sort -u' without 'uniq'.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/uniq>
+or available locally via: info '(coreutils) uniq invocation'
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq
+aaa@mail.ru
+bbb@mail.ru
+ccc@mail.ru
+ddd@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort
+aaa@mail.ru
+bbb@mail.ru
+ccc@mail.ru
+ddd@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt
+aaa@mail.ru Dmitry Petrov
+bbb@mail.ru Eugeny Ivanov
+ccc@mail.ru Pavel Smirnov
+ddd@mail.ru Dmitry Sverchkob
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ eccho bbb@mail.ru Sergey Kalinin >> file1.txt
+bash: eccho: command not found
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ echo bbb@mail.ru Sergey Kalinin >> file1.txt
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -d
+bbb@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$ cat file1.txt | cut -d" " -f1 | sort | uniq -c
+      1 aaa@mail.ru
+      2 bbb@mail.ru
+      1 ccc@mail.ru
+      1 ddd@mail.ru
+
+kruti@DESKTOP-KRUTILIN MINGW64 /e/Университет/Курс-2/2_semester/ОСиСП/labaratory_3
+$

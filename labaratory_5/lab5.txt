@@ -1,0 +1,107 @@
+----3----
+
+yes
+y
+y
+y
+y
+y
+y
+y
+y
+y^Z
+[1]+  Stopped                 yes
+krutilins@krutilins-VirtualBox:~$ fg %1
+y
+y
+y
+y
+y
+y
+y
+y
+y
+^C
+krutilins@krutilins-VirtualBox:
+
+-----6-----
+
+krutilins@krutilins-VirtualBox:~$ yes > /dev/null
+^Z
+[1]+  Stopped                 yes > /dev/null
+krutilins@krutilins-VirtualBox:~$ bg %1
+[1]+ yes > /dev/null &
+krutilins@krutilins-VirtualBox:~$ jobs
+[1]+  Running                 yes > /dev/null &
+krutilins@krutilins-VirtualBox:~$ 
+
+----11-----
+
+krutilins@krutilins-VirtualBox:~$ yes > /dev/null &
+[1] 10128
+krutilins@krutilins-VirtualBox:~$ yes > /dev/null &
+[2] 10129
+krutilins@krutilins-VirtualBox:~$ yes > /dev/null &
+[3] 10130
+krutilins@krutilins-VirtualBox:~$ jobs
+[1]   Running                 yes > /dev/null &
+[2]-  Running                 yes > /dev/null &
+[3]+  Running                 yes > /dev/null &
+krutilins@krutilins-VirtualBox:~$ killall yes
+krutilins@krutilins-VirtualBox:~$ jobs
+[1]   Terminated              yes > /dev/null
+[2]-  Terminated              yes > /dev/null
+[3]+  Terminated              yes > /dev/null
+krutilins@krutilins-VirtualBox:~$ 
+
+
+-----12-----
+
+
+krutilins@krutilins-VirtualBox:~$ yes > /dev/null &
+[1] 10274
+krutilins@krutilins-VirtualBox:~$ nice -n +5 yes > /dev/null &
+[2] 10275
+krutilins@krutilins-VirtualBox:~$ top -p 10274 -p 10275
+
+
+top - 21:06:53 up  7:23,  1 user,  load average: 1,08, 1,20, 0,95
+Tasks:   2 total,   2 running,   0 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 42,0 us, 44,0 sy, 14,0 ni,  0,0 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+MiB Mem :   1987,4 total,    239,0 free,    768,7 used,    979,7 buff/cache
+MiB Swap:    639,6 total,    595,2 free,     44,5 used.   1052,4 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND  
+  10274 krutili+  20   0   19244    588    520 R  75,0   0,0   0:27.69 yes      
+  10275 krutili+  25   5   19244    524    456 R  24,7   0,0   0:06.95 yes      
+
+
+krutilins@krutilins-VirtualBox:~$ 
+
+
+
+
+-----16-----
+
+krutilins@krutilins-VirtualBox:~/Documents$ crontab -e
+
+------------------вставляем эту строку в открывшийся файл------
+* * * * * /home/krutilins/Documents/repitedTask
+---------------------------------------------------------------
+---------------тогда как запускаемый файл выглядит так----------
+#!/bin/bash
+echo $(date -u) >> /home/krutilins/Documents/krutilinsLog
+echo "Lab rab 3. Zadanie 16" >> /home/krutilins/Documents/krutilinsLog
+-------------------------------------------------------------------
+crontab: installing new crontab
+
+получаем вот такой результат
+
+Пан 15 лют 2021 18:51:01 UTC
+Lab rab 3. Zadanie 16
+Пан 15 лют 2021 18:52:01 UTC
+Lab rab 3. Zadanie 16
+Пан 15 лют 2021 18:53:01 UTC
+Lab rab 3. Zadanie 16
+
+
